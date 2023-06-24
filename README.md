@@ -1,6 +1,6 @@
-# Home Assistant Swipe Navigation
+# Home Assistant Swipe Navigation [custom duration]
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration) ![Total dowloads](https://img.shields.io/github/downloads/zanna-37/hass-swipe-navigation/total?label=Total%20downloads) ![Downloads latest](https://img.shields.io/github/downloads/zanna-37/hass-swipe-navigation/latest/total?sort=semver&label=Dowloads%20@latest)
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
 
 Swipe through Home Assistant Dashboard views on mobile.
 
