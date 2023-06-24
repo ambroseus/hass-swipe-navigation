@@ -159,6 +159,7 @@ const SwipeNavigationConfigSchema = z.object({
       z.literal("fade"),
       z.literal("flip"),
     ]).optional(),
+  animate_duration: z.number().optional(),
   enable: z.boolean().optional(),
   logger_level: z
     .union([
@@ -192,6 +193,7 @@ class ConfigObserver {
 
 class Config {
   private animate: "none" | "swipe" | "fade" | "flip" = "none";
+  private animate_duration = 200;
   private enable = true;
   // Note that this is the level that is in force before the config is parsed.
   // This means that all logs below this level will be ignored until the config is parsed.
@@ -238,6 +240,10 @@ class Config {
 
   public getAnimate(): "none" | "swipe" | "fade" | "flip" {
     return this.animate;
+  }
+
+  public getAnimateDuration(): number {
+    return this.animate_duration;
   }
 
   public getEnable(): boolean {
@@ -312,7 +318,9 @@ class Config {
 
     const newConfig = new Config();
 
-    if (rawConfig.animate != null) { newConfig.animate = rawConfig.animate; }
+    if (rawConfig.animate != null) { newConfig.animate = rawConfig.animate; } 
+
+    if (rawConfig.animate_duration != null) { newConfig.animate_duration = rawConfig.animate_duration; }
 
     if (rawConfig.enable != null) { newConfig.enable = rawConfig.enable; }
 
@@ -810,7 +818,7 @@ class SwipeManager {
           tabs[index].dispatchEvent(new MouseEvent("click", { bubbles: false, cancelable: true }));
 
         } else {
-          const duration = 200;
+          const duration = Config.current().getAnimateDuration();
           view.style.transition = `transform ${duration}ms ease-in, opacity ${duration}ms ease-in`;
 
           if (configAnimate == "swipe") {
